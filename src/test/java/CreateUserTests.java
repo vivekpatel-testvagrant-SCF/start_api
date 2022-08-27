@@ -2,19 +2,36 @@
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.hamcrest.Matchers;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import users.UsersClient;
+
+import javax.jws.soap.SOAPBinding;
+
+import java.util.UUID;
 
 import static io.restassured.RestAssured.given;
 
 public class CreateUserTests {
+
+
+    //Arrange
+    private UsersClient usersClient;
+
+    @BeforeClass
+    public void beforeClass() {
+        usersClient = new UsersClient();
+    }
     @Test
     public void shouldCreateMaleUser() {
-        //Arrange
-        String body = "{\"name\":\"Vivek\", \"gender\":\"male\", \"email\":\"vi1v1ek1k11vhpatel@gmail.com\", \"status\":\"active\"}";
+
+
+
+        String email =  String.format("%s@gmail.com",UUID.randomUUID());
+        String body = String.format("{\"name\":\"Vivek\", \"gender\":\"male\", \"email\":\"%s\", \"status\":\"active\"}",email);
 
         //Act
-        new UsersClient().createUser(body)
+        usersClient.createUser(body)
                 .then()
                 //Assert
                 .log().body()
@@ -27,10 +44,11 @@ public class CreateUserTests {
     @Test
     public void shouldCreateFemaleUser() {
         //Arrange
-        String body = "{\"name\":\"Vivek\", \"gender\":\"male\", \"email\":\"vi1v1ekk111vhp1atel@gmail.com\", \"status\":\"active\"}";
+        String email =  String.format("%s@gmail.com",UUID.randomUUID());
+        String body = String.format("{\"name\":\"Vivek\", \"gender\":\"male\", \"email\":\"%s\", \"status\":\"active\"}",email);
 
         //Act
-        new UsersClient().createUser(body)
+       usersClient.createUser(body)
                 .then()
                 .log().body()
 
