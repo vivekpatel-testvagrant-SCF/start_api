@@ -5,6 +5,7 @@ import org.hamcrest.Matchers;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import users.UsersClient;
+import users.create.CreateUserRequest;
 
 import javax.jws.soap.SOAPBinding;
 
@@ -28,10 +29,12 @@ public class CreateUserTests {
 
 
         String email =  String.format("%s@gmail.com",UUID.randomUUID());
-        String body = String.format("{\"name\":\"Vivek\", \"gender\":\"male\", \"email\":\"%s\", \"status\":\"active\"}",email);
-
+        String gender = "female";
+        String status = "active";
+        String name = "Vivek";
+        CreateUserRequest createUserRequest =  new CreateUserRequest(name,gender,email,status);
         //Act
-        usersClient.createUser(body)
+        usersClient.createUser(createUserRequest)
                 .then()
                 //Assert
                 .log().body()
@@ -45,10 +48,13 @@ public class CreateUserTests {
     public void shouldCreateFemaleUser() {
         //Arrange
         String email =  String.format("%s@gmail.com",UUID.randomUUID());
-        String body = String.format("{\"name\":\"Vivek\", \"gender\":\"male\", \"email\":\"%s\", \"status\":\"active\"}",email);
+        String gender = "female";
+        String status = "active";
+        String name = "Vivek";
+        CreateUserRequest createUserRequest =  new CreateUserRequest(name,gender,email,status);
 
         //Act
-       usersClient.createUser(body)
+       usersClient.createUser(createUserRequest)
                 .then()
                 .log().body()
 
