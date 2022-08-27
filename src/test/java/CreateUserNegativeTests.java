@@ -1,6 +1,7 @@
-import Users.UsersClient;
+
 import org.hamcrest.Matchers;
 import org.testng.annotations.Test;
+import users.UsersClient;
 
 public class CreateUserNegativeTests {
 
