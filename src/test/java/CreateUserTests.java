@@ -1,8 +1,9 @@
-import Users.UsersClient;
+g
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.hamcrest.Matchers;
 import org.testng.annotations.Test;
+import users.UsersClient;
 
 import static io.restassured.RestAssured.given;
 
